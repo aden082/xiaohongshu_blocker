@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "Xiaohongshu Blocker",
+  "description": "屏蔽小红书不想看的话题和博主",
+  "version": "1.1",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.xiaohongshu.com/search_result?*",
+        "https://www.xiaohongshu.com/search_result/?*",
+        "https://www.xiaohongshu.com/explore?*",
+        "https://www.xiaohongshu.com/explore"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon48_gray.png"
+    },
+    "default_title": "Xiaohongshu Blocker\u000A屏蔽小红书不想看的话题和博主"
+  },
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; connect-src 'self';"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content.wasm",
+        "popup.wasm",
+        "background.wasm"
+      ],
+      "matches": [
+        "https://www.xiaohongshu.com/*"
+      ]
+    }
+  ]
+}
